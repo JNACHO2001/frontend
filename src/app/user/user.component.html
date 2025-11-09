@@ -1,0 +1,59 @@
+<p>user works!</p>
+
+
+<div class="container">
+  <h2>Lista de Usuarios</h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+         <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+
+         <tr *ngFor="let user of users">
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.edad }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.telefono }}</td>
+        <td class="acciones">
+          <button type="button" class="btn-editar">Editar</button>
+          <button type="button" class="btn-eliminar">Eliminar</button>
+        </td>
+      </tr>
+      
+     
+    </tbody>
+  </table>
+</div>
+
+<form (ngSubmit)="crearUsuario()" class="formulario">
+  <div>
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre" placeholder="Nombre" required />
+  </div>
+
+  <div>
+    <label>Edad:</label>
+    <input type="number" [(ngModel)]="nuevoUsuario.edad" name="edad" placeholder="Edad" required />
+  </div>
+
+  <div>
+    <label>Correo:</label>
+    <input type="email" [(ngModel)]="nuevoUsuario.email" name="correo" placeholder="Correo electrónico" required />
+  </div>
+
+  <div>
+    <label>Teléfono:</label>
+    <input type="text" [(ngModel)]="nuevoUsuario.telefono" name="telefono" placeholder="Teléfono" required />
+  </div>
+
+  <button type="submit">Agregar Usuario</button>
+</form>
+

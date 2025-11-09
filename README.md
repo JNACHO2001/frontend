@@ -1,27 +1,126 @@
-# Interfaz
+# Interfaz de Administración de Usuarios (Frontend)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+## Descripción general
 
-## Development server
+Este proyecto es una interfaz web desarrollada con Angular para la gestión de usuarios. Proporciona componentes y servicios básicos para mostrar, crear y manipular información de usuarios desde el frontend, y está preparado para integrarse con un backend RESTful. Incluye la estructura típica de una aplicación Angular con componentes, servicios, modelos y configuración para la ejecución local.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologías utilizadas
 
-## Code scaffolding
+- Angular
+- TypeScript
+- HTML
+- CSS
+- RxJS
+- Angular CLI
+- Node.js / npm
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Requisitos previos
 
-## Build
+- Node.js (>= 14.x) y npm instalados
+- Angular CLI (opcionalmente global: `npm install -g @angular/cli`)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Instalación y ejecución
 
-## Running unit tests
+Sigue estos pasos para ejecutar el proyecto en tu entorno local:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clonar el repositorio:
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/JNACHO2001/frontend.git
+cd frontend
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Instalar dependencias:
 
-## Further help
+```bash
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+3. Iniciar el servidor de desarrollo:
+
+```bash
+ng serve
+```
+
+Nota: Si no tienes `ng` disponible globalmente, puedes usar `npx ng serve` o ejecutar el script npm correspondiente si está definido en `package.json` (`npm run start` / `npm start`).
+
+## Estructura del proyecto
+
+La estructura principal del proyecto incluye:
+
+- `src/` - Código fuente de la aplicación Angular.
+  - `app/` - Módulos, componentes y servicios principales.
+    - `app.component.*` - Componente raíz.
+    - `app.routes.ts` - Definición de rutas de la aplicación.
+    - `app.config.ts`, `app.config.server.ts` - Configuración de la aplicación (p. ej. URL base del API).
+    - `models/` - Modelos de datos (interfaces y tipos).
+    - `services/` - Servicios Angular que encapsulan llamadas HTTP y lógica de negocio (por ejemplo `users.service.ts`).
+    - `user/` - Componente(s) relacionados con la gestión de usuarios (`user.component.ts`, vistas y estilos).
+- `assets/` - Recursos estáticos como imágenes y archivos.
+- `main.ts` / `main.server.ts` - Entradas para client-side y server-side (si aplica SSR).
+- `server.ts` - Archivo de servidor si se utiliza renderizado en servidor (opcional).
+- `package.json` - Scripts y dependencias del proyecto.
+
+## Funcionalidades principales
+
+Lista de características implementadas o previstas en el frontend:
+
+- Visualización de listas de usuarios.
+- Componentes para ver y editar detalles de usuario.
+- Servicios para comunicación con un API backend (consumo REST via HttpClient).
+- Formularios con validación para creación/edición de usuarios.
+- Estructura modular y desacoplada para facilitar pruebas y mantenimiento.
+
+Si la aplicación incluye más funcionalidades (autenticación, paginación, búsqueda, etc.), se deben documentar aquí o en archivos específicos de la carpeta `docs/` si se añaden.
+
+## Conexión con el backend o API
+
+Los servicios Angular ubicados en `src/app/services` manejan la comunicación con el backend mediante `HttpClient`. Pautas generales para la integración:
+
+- Configurar la URL base del API en `app.config.ts` o en una variable de entorno.
+- Los servicios (por ejemplo `UsersService`) exponen métodos que realizan peticiones HTTP (`GET`, `POST`, `PUT`, `DELETE`) y retornan Observables.
+- Manejar errores en los servicios y/o emplear interceptores HTTP para añadir cabeceras comunes (por ejemplo, token de autenticación) y gestionar respuestas globales.
+
+Ejemplo (conceptual) en un servicio:
+
+```ts
+// users.service.ts
+// constructor(private http: HttpClient) {}
+// getUsers(): Observable<User[]> { return this.http.get<User[]>(`${API_BASE}/users`); }
+```
+
+## Pruebas
+
+Este proyecto incluye pruebas unitarias básicas (si están presentes en `src/app/*.spec.ts`). Para ejecutar las pruebas:
+
+```bash
+npm test
+# o
+ng test
+```
+
+Si existen pruebas e2e, se pueden ejecutar con:
+
+```bash
+ng e2e
+```
+
+Si la configuración de pruebas no está presente o necesita ajustes, revise `tsconfig.spec.json` y `angular.json` para asegurar que los builders están definidos.
+
+## Autor
+
+Desarrollador: JNACHO2001
+
+GitHub: https://github.com/JNACHO2001
+
+Si quieres contribuir o reportar un problema, abre un issue o envía un pull request en el repositorio.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulte el archivo `LICENSE` incluido en el repositorio para más detalles.
+
+---
+
+Notas adicionales:
+- Ajusta la URL del repositorio en la sección de instalación si el repositorio remoto tiene otra ruta.
+- Si este proyecto utiliza renderizado en servidor (SSR) o scripts adicionales, documenta los comandos específicos en esta guía.

@@ -2,7 +2,7 @@ import { Component, inject, } from '@angular/core';
 import { UserResponse, UsersService, UserRequest } from '../services/users.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { isModuleNamespaceObject } from 'node:util/types';
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -37,9 +37,9 @@ export class UserComponent {
     if (!this.nuevoUsuario.nombre) return;
 
     this.userService.createUser(this.nuevoUsuario)
-      .subscribe(nuevo => {
-        this.users.push(nuevo);
-        console.log(nuevo)
+      .subscribe(nuevoUsuario => {
+        this.users.push(nuevoUsuario);
+        console.log(nuevoUsuario)
 
 
       })
@@ -48,24 +48,18 @@ export class UserComponent {
 
   }
 
-  eliminarUsuario(id: number) {
+ eliminarUsuario(id: number) {
+  this.userService.eliminarUser(id).subscribe({
+    next: (mensaje) => {
+      console.log(mensaje); 
+      this.users = this.users.filter(u => u.id !== id);
+    },
+    error: (err) => {
+      console.error("Error al eliminar usuario:", err);
+    }
+  });
+}
 
-   
-    this.userService.eliminarUser(id).subscribe({
-      next: mensaje => console.log(mensaje,id),
-      error: err => console.log(err)
-      
-      
-
-
-
-    })
-
-
-
-
-
-  }
 
 
 }

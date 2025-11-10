@@ -43,9 +43,8 @@ export class UsersService {
       .pipe(map((response) => response.data as UserResponse));
   }
 
-  eliminarUser(id: number): Observable<String> {
-    return this.http.delete<String>(`${this.Url}/${id}`);
+ eliminarUser(id: number): Observable<string> { // recibimos el texto plano del json 
+  return this.http.delete(`${this.Url}/${id}`, { responseType: 'text' });
+}
 
-
-  }
 }

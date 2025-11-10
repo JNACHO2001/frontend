@@ -29,7 +29,7 @@ export interface ApiResponse<T> {
 export class UsersService {
   private readonly Url = 'http://localhost:8080/api/usuario';
 
-  private http=inject(HttpClient)
+  private http = inject(HttpClient)
 
   getUser(): Observable<UserResponse[]> {
     return this.http
@@ -41,5 +41,11 @@ export class UsersService {
     return this.http
       .post<ApiResponse<UserResponse>>(this.Url, user)
       .pipe(map((response) => response.data as UserResponse));
+  }
+
+  eliminarUser(id: number): Observable<String> {
+    return this.http.delete<String>(`${this.Url}/${id}`);
+
+
   }
 }
